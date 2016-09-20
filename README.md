@@ -10,5 +10,8 @@
   - into cloned folder
   - activate gulpfile `sudo npm instal`
 
-## 2. this gulpfile rule of scss
+## 2. start making site
+  - `gulp`
+
+## α. this gulpfile rule of scss
   - **scss** into *./src/scss* and maked **css** into *./components/css*
