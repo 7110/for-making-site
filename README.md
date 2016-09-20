@@ -13,5 +13,5 @@
 ## 2. start making site
   - `gulp`
 
-## α. this gulpfile rule of scss
+## α. scss
   - **scss** into *./src/scss* and maked **css** into *./components/css*
