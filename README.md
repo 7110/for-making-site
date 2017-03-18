@@ -1,17 +1,32 @@
-# for-making-site
+## install node and gulp
+* if brew is unless installed, install brew  
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-## 0. install and setting node.js
-  - download from [nodejs.org](https://nodejs.org/en/) and install
-  - check installed `node -v`
-  - install gulp `sudo npm install gulp -g`
+* install node  
+`brew install node`
 
-## 1. clone this
-  - clone this `git clone https://github.com/7110/for-making-site.git`
-  - into cloned folder
-  - activate gulpfile `sudo npm instal`
+* check installed  
+`node -v`  
+(Success if version is displayed like `v7.7.3`)
 
-## 2. start making site
-  - `gulp`
+* install gulp  
+`npm install gulp -g`
 
-## α. scss
-  - **scss** into *./src/scss* and maked **css** into *./components/css*
+
+## clone this
+* clone this repository   
+`git clone https://github.com/7110/for-making-site.git`
+
+* into cloned folder
+
+* activate gulpfile  
+`npm install`
+
+
+## start making site
+* start gulp  
+`gulp`
+
+
+## scss
+* _scss_ into _./src/scss_ and made _css_ into _./components/css_
