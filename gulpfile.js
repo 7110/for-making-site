@@ -1,82 +1,104 @@
-var gulp          = require('gulp');
-var $             = require('gulp-load-plugins')();
-var browserSync   = require('browser-sync');
+const browserSync = require('browser-sync');
+const gulp = require('gulp');
+const autoprefixer = require('gulp-autoprefixer');
+const babel = require('gulp-babel');
+const cleanCSS = require('gulp-clean-css');
+const header = require('gulp-header');
+const rename = require('gulp-rename');
+const sass = require('gulp-sass');
+const sourcemaps = require('gulp-sourcemaps');
+const uglify = require('gulp-uglify');
 
 
-var paths = {
-  "htmlSrc" : "./*.html",
-  "scssSrc" : "./src/scss/**/*.scss",
-  "jsSrc"   : "./src/js/*.js",
-  "jsLib"   : "./src/js/lib/*.js",
-  "imgSrc"  : "./src/images/**",
-  "rootComp" : "./components/",
-  "imgComp"  : "./components/images/",
-  "jsComp"  : "./components/js/"
-}
+const namespace = '7110';
+
+const paths = {
+  'html': '**/*.html',
+  'src': {
+    'es6': 'src/es6/**/*.es6',
+    'scss': 'src/scss/**/*.scss',
+  },
+  'dst': {
+    'js': 'dst/js/',
+    'css': 'dst/css/',
+  }
+};
 
 
-gulp.task('bs', function() {
+/* ====================
+  task modules
+==================== */
+
+// compile scss
+gulp.task('sass', () => {
+  gulp.src(paths.src.scss)
+  .pipe(sourcemaps.init())
+  .pipe(autoprefixer({
+    browsers: ['last 2 versions']
+  }))
+  .pipe(sass({
+    outputStyle: 'expanded'
+  }))
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest(paths.dst.css))
+  .pipe(rename({
+    suffix: '.min'
+  }))
+  .pipe(cleanCSS({
+    'compatibility': {
+      'properties': {
+        'colors': false
+      }
+    }
+  }))
+  .pipe(header('/* Copyright 2017 '+namespace+' All Rights Reserved. */\n'))
+  .pipe(gulp.dest(paths.dst.css));
+});
+
+
+// compile es6
+gulp.task('es6', () => {
+  gulp.src(paths.src.es6)
+  .pipe(sourcemaps.init())
+  .pipe(babel())
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest(paths.dst.js))
+  .pipe(rename({
+    suffix: '.min'
+  }))
+  .pipe(uglify())
+  .pipe(gulp.dest(paths.dst.js));
+});
+
+
+// browser sync init
+gulp.task('bs-init', () => {
   browserSync.init({
-    server: {
-      baseComp: "./"
-    },
-    notify  : true,
-    xip     : false
+    'server': './'
   });
 });
 
-gulp.task('scss', function() {
-  return gulp.src(paths.scssSrc)
-    .pipe($.sourcemaps.init())
-      .pipe($.sass()).on('error', $.sass.logError)
-      .pipe($.autoprefixer({
-        browsers: ['last 2 versions']
-      }))
-    .pipe($.sourcemaps.write())
-    .pipe(gulp.dest(paths.rootComp + 'css'))
-    .pipe($.rename({
-      suffix: '.min'
-    }))
-    .pipe($.csso())
-    .pipe(gulp.dest(paths.rootComp + 'css'))
-    .pipe(browserSync.reload({
-      stream: true,
-      once  : true
-    }));
+
+// browser sync reload
+gulp.task('bs-reload', () => {
+  browserSync.reload();
 });
 
-gulp.task('bs-reload', function() {
-   browserSync.reload();
+
+/* ====================
+  tasks
+==================== */
+
+// gulp tasks of starting bs-init and compiling sass and es6 + live reload
+gulp.task('default', ['bs-init', 'sass', 'es6'], () => {
+  gulp.watch(paths.html, ['bs-reload']);
+  gulp.watch(paths.src.scss, ['sass', 'bs-reload']);
+  gulp.watch(paths.src.es6, ['es6', 'bs-reload']);
 });
 
-gulp.task('image', function() {
-  return gulp.src(paths.imgSrc)
-    .pipe($.changed(paths.imgComp))
-    .pipe($.imagemin({
-      optimizationLevel: 3
-    }))
-    .pipe(gulp.dest(paths.imgComp));
-});
 
-gulp.task('js', function() {
-  return gulp.src([paths.jsLib, paths.jsSrc])
-    .pipe($.uglify({preserveComments: 'license'}))
-    .pipe($.concat('main.min.js', {newLine: '\n'})
-    )
-    .pipe(gulp.dest(paths.jsComp));
-});
-
-gulp.task('default', ['image', 'js', 'bs', 'scss', 'bs-reload'], function() {
-  $.watch([paths.htmlSrc],function(e) {
-    gulp.start("bs-reload")
-  });
-  $.watch([paths.scssSrc],function(e) {
-    gulp.start("scss")
-  });
-  $.watch([paths.imgSrc],function(e) {
-    gulp.start("image")
-  });
-  $.watch([paths.jsSrc],function(e) {
-    gulp.start("js")
-  });
+// gulp tasks of starting bs-init and compiling sass and es6
+gulp.task('compile', ['bs-init', 'sass', 'es6'], () => {
+  gulp.watch(paths.src.scss, ['sass']);
+  gulp.watch(paths.src.es6, ['es6']);
 });
