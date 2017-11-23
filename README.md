@@ -32,3 +32,8 @@ npm run default
 # only compile scss and es6
 npm run compile
 ```
+
+### add npm package
+```bash
+yarn add [package name]
+```
