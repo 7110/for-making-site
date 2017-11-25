@@ -27,10 +27,10 @@ yarn install
 ### start gulp tasks
 ```bash
 # compile scss and es6 + live reload
-npm run default
+yarn run default
 
 # only compile scss and es6
-npm run compile
+yarn run compile
 ```
 
 ### add npm package
