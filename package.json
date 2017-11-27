@@ -3,7 +3,8 @@
   "version": "1.1.0",
   "description": "",
   "main": "gulpfile.js",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
@@ -16,10 +17,9 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
-    "gulp-uglify": "^3.0.0",
+    "gulp-uglify-es": "^0.1.6",
     "gulp-webpack": "^1.5.0"
   },
-  "devDependencies": {},
   "scripts": {
     "default": "gulp default",
     "compile": "gulp compile"
