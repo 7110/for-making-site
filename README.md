@@ -1,6 +1,6 @@
 # mapping.website
 
-## make gulp environment
+## make environment
 this gulp environment has two tasks of compiling sass and es6.
 
 ### install brew
@@ -18,13 +18,13 @@ brew install node
 brew install yarn
 ```
 
-### install npm packages
+### install packages
 type in the same directory with package.json  
 ```bash
 yarn install
 ```
 
-### start gulp tasks
+### start tasks
 ```bash
 # compile scss and es6 + live reload
 yarn run default
@@ -33,7 +33,7 @@ yarn run default
 yarn run compile
 ```
 
-### add npm package
+### add package
 ```bash
 yarn add [package name]
 ```
