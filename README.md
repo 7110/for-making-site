@@ -47,3 +47,6 @@ assign file extension icons and colours for improved visual grepping
 
 * [pigments](https://atom.io/packages/pigments)  
 A package to display colors in project and files
+
+* [autocomplete-paths](https://atom.io/packages/autocomplete-paths)  
+Adds path autocompletion to autocomplete+
