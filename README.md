@@ -37,3 +37,16 @@ yarn run compile
 ```bash
 yarn add [package name]
 ```
+
+## Atom's packages
+* [emmet](https://atom.io/packages/emmet)  
+the essential tool for web developers
+
+* [file-icon](https://atom.io/packages/file-icons)  
+assign file extension icons and colours for improved visual grepping
+
+* [pigments](https://atom.io/packages/pigments)  
+A package to display colors in project and files
+
+* [autocomplete-paths](https://atom.io/packages/autocomplete-paths)  
+Adds path autocompletion to autocomplete+
