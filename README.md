@@ -1,4 +1,4 @@
-# mapping.website
+# front-env
 
 ## make environment
 this gulp environment has two tasks of compiling sass and es6.
