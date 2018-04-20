@@ -42,7 +42,7 @@ yarn add [package name]
 * [emmet](https://atom.io/packages/emmet)  
 the essential tool for web developers
 
-* [file-icon](https://atom.io/packages/file-icons)  
+* [file-icons](https://atom.io/packages/file-icons)  
 assign file extension icons and colours for improved visual grepping
 
 * [pigments](https://atom.io/packages/pigments)  
