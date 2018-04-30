@@ -39,6 +39,7 @@ yarn add [package name]
 ```
 
 ## Atom's packages
+### normally
 * [emmet](https://atom.io/packages/emmet)  
 the essential tool for web developers
 
@@ -50,3 +51,16 @@ A package to display colors in project and files
 
 * [autocomplete-paths](https://atom.io/packages/autocomplete-paths)  
 Adds path autocompletion to autocomplete+
+
+## Vue.js
+* [language-vue-component](https://atom.io/packages/language-vue-component)
+Adds syntax highlighting to Vue Component files in Atom
+
+* [vue-autocomplete](https://atom.io/packages/vue-autocomplete)
+Vue.js 1.0+ autocomplete for Atom
+
+* [vue-snippets](https://atom.io/packages/vue-snippets)
+Vue.js 1.0+ ES6 snippets for Atom
+
+* [vue-hyperclick](https://atom.io/packages/vue-hyperclick)
+A hyperclick provider for Vue components that lets you jump to where variables are defined
