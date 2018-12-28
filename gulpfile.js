@@ -1,3 +1,4 @@
+const browserSync = require('browser-sync');
 const gulp = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
@@ -15,6 +16,10 @@ const paths = {
   }
 };
 
+
+// ========================================
+// sass: compile sass(scss) to css
+// ========================================
 
 gulp.task('sass', done => {
   gulp.src(paths.src.scss)
@@ -42,6 +47,27 @@ gulp.task('sass', done => {
 });
 
 
-gulp.task('dev', () => {
-  gulp.watch(paths.src.scss, gulp.task('sass'));
+// ========================================
+// bs-init & bs-reload: browser sync
+// ========================================
+
+gulp.task('bs-init', done => {
+  browserSync.init({
+    'server': './'
+  });
+  done();
 });
+
+gulp.task('bs-reload', done => {
+  browserSync.reload();
+  done();
+});
+
+
+// ========================================
+// dev: sass and bs-reload after bs-init
+// ========================================
+
+gulp.task('dev', gulp.series(gulp.parallel('bs-init'), () => {
+  gulp.watch(paths.src.scss, gulp.series( gulp.parallel('sass', 'bs-reload')));
+}));
