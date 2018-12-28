@@ -13,7 +13,8 @@ const paths = {
   },
   'dist': {
     'css': 'dist/css/',
-  }
+  },
+  'html': 'index.html'
 };
 
 
@@ -69,5 +70,10 @@ gulp.task('bs-reload', done => {
 // ========================================
 
 gulp.task('dev', gulp.series(gulp.parallel('bs-init'), () => {
-  gulp.watch(paths.src.scss, gulp.series( gulp.parallel('sass', 'bs-reload')));
+  gulp.watch(paths.src.scss, gulp.series(
+    gulp.parallel('sass', 'bs-reload')
+  ));
+  gulp.watch(paths.html, gulp.series(
+    gulp.parallel('bs-reload')
+  ));
 }));
