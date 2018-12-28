@@ -1,0 +1,13 @@
+{
+  "name": "7110",
+  "version": "3.0.0",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "dev": "gulp dev"
+  },
+  "author": "7110",
+  "license": "ISC",
+  "homepage": "https://github.com/7110/"
+}
