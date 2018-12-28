@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "webpack --mode development --env.dist=false"
   },
-  "dependencies": {},
+  "dependencies": {
+    "kabu": "^1.0.0"
+  },
   "devDependencies": {
     "autoprefixer": "^8.6.3",
     "css-loader": "^0.28.11",
