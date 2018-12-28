@@ -2,6 +2,7 @@ const browserSync = require('browser-sync');
 const gulp = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
+const imagemin = require("gulp-imagemin");
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
@@ -10,11 +11,13 @@ const sourcemaps = require('gulp-sourcemaps');
 const paths = {
   'src': {
     'scss': 'src/scss/**/*.scss',
+    'img': 'src/images/**/*.+(jpg|jpeg|png)',
   },
   'dist': {
     'css': 'dist/css/',
+    'img': 'dist/images/',
   },
-  'html': 'index.html'
+  'html': 'index.html',
 };
 
 
@@ -22,7 +25,7 @@ const paths = {
 // sass: compile sass(scss) to css
 // ========================================
 
-gulp.task('sass', done => {
+gulp.task('sass', doneSass => {
   gulp.src(paths.src.scss)
   .pipe(sourcemaps.init())
   .pipe(sass({
@@ -44,7 +47,22 @@ gulp.task('sass', done => {
     suffix: '.min',
   }))
   .pipe(gulp.dest(paths.dist.css));
-  done();
+  doneSass();
+});
+
+
+// ========================================
+// image: compress images
+// ========================================
+
+gulp.task('image', doneImage => {
+  gulp.src(paths.src.img)
+  .pipe(imagemin([
+    imagemin.jpegtran({progressive: true}),
+    imagemin.optipng({optimizationLevel: 3}),
+  ]))
+  .pipe(gulp.dest(paths.dist.img));
+  doneImage();
 });
 
 
@@ -52,17 +70,18 @@ gulp.task('sass', done => {
 // bs-init & bs-reload: browser sync
 // ========================================
 
-gulp.task('bs-init', done => {
+gulp.task('bs-init', doneBsInit => {
   browserSync.init({
     'server': './'
   });
-  done();
+  doneBsInit();
 });
 
-gulp.task('bs-reload', done => {
+gulp.task('bs-reload', doneReload => {
   browserSync.reload();
-  done();
+  doneReload();
 });
+
 
 
 // ========================================
@@ -77,3 +96,12 @@ gulp.task('dev', gulp.series(gulp.parallel('bs-init'), () => {
     gulp.parallel('bs-reload')
   ));
 }));
+
+
+// ========================================
+// build: build for deployment
+// ========================================
+
+gulp.task('build', gulp.series(
+  gulp.parallel('sass', 'image')
+));
