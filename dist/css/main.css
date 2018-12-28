@@ -1,0 +1,16 @@
+body {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+body h2 {
+  font-size: 24px;
+  color: #333333;
+}
+
+body p {
+  font-size: 16px;
+  color: #333333;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4uc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVFLGlDQUF3QjtVQUF4Qix5QkFBd0I7Q0FXekI7O0FBYkQ7RUFLSSxnQkFBZTtFQUNmLGVBTGtCO0NBTW5COztBQVBIO0VBVUksZ0JBQWU7RUFDZixlQVZrQjtDQVduQiIsImZpbGUiOiJtYWluLmNzcyIsInNvdXJjZXNDb250ZW50IjpbImJvZHkge1xuICAkdGV4dC1jb2xvcjogIzMzMzMzMztcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKDApO1xuXG4gIGgyIHtcbiAgICBmb250LXNpemU6IDI0cHg7XG4gICAgY29sb3I6ICR0ZXh0LWNvbG9yO1xuICB9XG5cbiAgcCB7XG4gICAgZm9udC1zaXplOiAxNnB4O1xuICAgIGNvbG9yOiAkdGV4dC1jb2xvcjtcbiAgfVxufSJdfQ== */
