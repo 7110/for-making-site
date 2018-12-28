@@ -1,20 +1,24 @@
 const browserSync = require('browser-sync');
 const gulp = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
+const babel = require('gulp-babel');
 const cleanCSS = require('gulp-clean-css');
 const imagemin = require("gulp-imagemin");
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
+const uglify = require('gulp-uglify');
 
 
 const paths = {
   'src': {
     'scss': 'src/scss/**/*.scss',
+    'js': 'src/js/**/*.js',
     'img': 'src/images/**/*.+(jpg|jpeg|png)',
   },
   'dist': {
     'css': 'dist/css/',
+    'js': 'dist/js/',
     'img': 'dist/images/',
   },
   'html': 'index.html',
@@ -48,6 +52,27 @@ gulp.task('sass', doneSass => {
   }))
   .pipe(gulp.dest(paths.dist.css));
   doneSass();
+});
+
+
+// ========================================
+// js: compile es6 to es5
+// ========================================
+
+gulp.task('js', doneJs => {
+  gulp.src(paths.src.js)
+  .pipe(sourcemaps.init())
+  .pipe(babel({
+    presets: ['@babel/env']
+  }))
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest(paths.dist.js))
+  .pipe(uglify())
+  .pipe(rename({
+    suffix: '.min',
+  }))
+  .pipe(gulp.dest(paths.dist.js));
+  doneJs();
 });
 
 
@@ -92,6 +117,9 @@ gulp.task('dev', gulp.series(gulp.parallel('bs-init'), () => {
   gulp.watch(paths.src.scss, gulp.series(
     gulp.parallel('sass', 'bs-reload')
   ));
+  gulp.watch(paths.src.js, gulp.series(
+    gulp.parallel('js', 'bs-reload')
+  ));
   gulp.watch(paths.html, gulp.series(
     gulp.parallel('bs-reload')
   ));
@@ -103,5 +131,5 @@ gulp.task('dev', gulp.series(gulp.parallel('bs-init'), () => {
 // ========================================
 
 gulp.task('build', gulp.series(
-  gulp.parallel('sass', 'image')
+  gulp.parallel('sass', 'js', 'image')
 ));
