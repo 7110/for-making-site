@@ -1,17 +1,43 @@
+"use strict";
+
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 module.exports = {
-  entry: {
-    app: './src/es6/app.es6'
-  },
+  mode: "development",
+  context: path.join(__dirname, "./src"),
+  entry: "src/test.js",
   output: {
-    filename: '[name].js'
+    path: path.join(__dirname, "./dist"),
+    filename: "[name].js"
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              sourceMap: true,
+              plugins: [require("autoprefixer")({ grid: true })]
+            }
+          },
+          "sass-loader"
+        ]
       }
     ]
-  }
-}
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "./css/[name].css"
+    })
+  ]
+  // devServer: {
+  //   contentBase: path.join(__dirname, './'),
+  //   watchContentBase: true,
+  // },
+};
