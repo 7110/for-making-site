@@ -22,7 +22,7 @@ const paths = {
     'js': 'dist/js/',
     'img': 'dist/images/',
   },
-  'html': 'index.html',
+  'html': 'dist/**/*.html',
   'php': 'dist/*.php',
 };
 
@@ -99,7 +99,7 @@ gulp.task('image', doneImage => {
 
 gulp.task('bs-init', doneBsInit => {
   browserSync.init({
-    'server': './'
+    'server': './dist/'
   });
   doneBsInit();
 });
