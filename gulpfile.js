@@ -3,6 +3,7 @@ const gulp = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const cleanCSS = require('gulp-clean-css');
+const connect = require('gulp-connect-php');
 const imagemin = require("gulp-imagemin");
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
@@ -22,6 +23,7 @@ const paths = {
     'img': 'dist/images/',
   },
   'html': 'index.html',
+  'php': 'dist/*.php',
 };
 
 
@@ -102,6 +104,17 @@ gulp.task('bs-init', doneBsInit => {
   doneBsInit();
 });
 
+gulp.task('bs-init-php', doneBsInitPhp => {
+  connect.server({
+    base: './dist/',
+  }, () => {
+    browserSync({
+      proxy: '127.0.0.1:8000'
+    });
+  });
+  doneBsInitPhp();
+});
+
 gulp.task('bs-reload', doneReload => {
   browserSync.reload();
   doneReload();
@@ -121,6 +134,26 @@ gulp.task('dev', gulp.series(gulp.parallel('bs-init'), () => {
     gulp.parallel('js', 'bs-reload')
   ));
   gulp.watch(paths.html, gulp.series(
+    gulp.parallel('bs-reload')
+  ));
+}));
+
+
+// ========================================
+// dev: sass and bs-reload after bs-init
+// ========================================
+
+gulp.task('wrap', gulp.series(gulp.parallel('bs-init-php'), () => {
+  gulp.watch(paths.src.scss, gulp.series(
+    gulp.parallel('sass', 'bs-reload')
+  ));
+  gulp.watch(paths.src.js, gulp.series(
+    gulp.parallel('js', 'bs-reload')
+  ));
+  gulp.watch(paths.html, gulp.series(
+    gulp.parallel('bs-reload')
+  ));
+  gulp.watch(paths.php, gulp.series(
     gulp.parallel('bs-reload')
   ));
 }));
