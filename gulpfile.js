@@ -23,7 +23,7 @@ const paths = {
     'img': 'dist/images/',
   },
   'html': 'dist/**/*.html',
-  'php': 'dist/*.php',
+  'php': 'dist/**/*.php',
 };
 
 
