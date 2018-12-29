@@ -6,6 +6,7 @@ this front development environment is using gulp!
 - compile _scss_ to _css_
 - compile _es6_ to _es6_
 - compress images of _png_ & _jpg_
+- wrap _html_ modules by _php_
 - browser sync
 
 
@@ -37,6 +38,9 @@ yarn install
 ```bash
 # compile scss and es6 + compress images + browser sync
 yarn run dev
+
+# wrap html modules + compile scss and es6 + compress images + browser sync
+yarn run wrap
 
 # build for deployment by compiled and compressed
 yarn run build
