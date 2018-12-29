@@ -4,7 +4,7 @@
 this front development environment is using gulp!
 
 - compile _scss_ to _css_
-- compile _es6_ to _es6_
+- compile _es6_ to _es5_
 - compress images of _png_ & _jpg_
 - wrap _html_ modules by _php_
 - browser sync
